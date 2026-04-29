@@ -27,7 +27,7 @@ requirements:
     - azure-mgmt-core >=1.3.2,<2.0.0
     - typing_extensions >=4.3.0  # [py<38]
 
-tests:
+test:
   imports:
     - azure.mgmt.signalr
     - azure.mgmt.signalr.aio
