@@ -1,0 +1,51 @@
+{% set name = "azure-mgmt-signalr" %}
+{% set version = "2.0.0b2" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: d393d457ca2e00aabfc611b1544588cc3a29d1aed60d35799865520b8b2ff4fe
+
+build:
+  number: 0
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  skip: true  # [py<37]
+
+requirements:
+  host:
+    - setuptools
+    - wheel
+    - python
+    - pip
+  run:
+    - python
+    - isodate >=0.6.1,<1.0.0
+    - azure-common >=1.1,<2
+    - azure-mgmt-core >=1.3.2,<2.0.0
+    - typing_extensions >=4.3.0  # [py<38]
+
+test:
+  imports:
+    - azure.mgmt.signalr
+    - azure.mgmt.signalr.aio
+  commands:
+    - pip check
+  requires:
+    - pip
+
+about:
+  home: https://github.com/Azure/azure-sdk-for-python
+  summary: Microsoft Azure SignalR Client Library for Python
+  license: MIT
+  license_file: LICENSE
+  license_family: MIT
+  description: Microsoft Azure SignalR Client Library for Python
+  dev_url: https://github.com/Azure/azure-sdk-for-python
+  doc_url: https://github.com/Azure/azure-sdk-for-python
+
+extra:
+  recipe-maintainers:
+    - janjagusch
